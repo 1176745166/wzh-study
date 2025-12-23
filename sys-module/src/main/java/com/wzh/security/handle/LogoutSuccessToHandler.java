@@ -34,7 +34,7 @@ public class LogoutSuccessToHandler implements LogoutSuccessHandler {
     private final TokenService tokenService;
 
     @Override
-    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         response.setStatus(HttpStatus.HTTP_OK);
         response.setContentType("application/json;charset=utf-8");
 
