@@ -7,12 +7,12 @@ import com.wzh.security.dto.login.LoginUser;
 import com.wzh.security.service.SysPermissionService;
 import com.wzh.security.service.TokenService;
 import com.wzh.security.utils.SecurityUtils;
-import com.wzh.service.ISysMenuService;
 import com.wzh.security.service.SysLoginService;
 import com.wzh.vo.ResponseVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +49,7 @@ public class SysLoginController {
         return ResponseVO.success(token).setMessage("登录成功");
     }
 
+    @PreAuthorize("hasRole('admin')")
     @PostMapping("/getInfo")
     @Operation(summary = "获取用户信息", description = "获取用户信息")
     public ResponseVO getInfo() {

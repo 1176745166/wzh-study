@@ -19,7 +19,7 @@ import org.springframework.util.StringUtils;
 /**
  * 安全服务工具类
  *
- * @author ruoyi
+ * @author wzh
  */
 public class SecurityUtils {
 

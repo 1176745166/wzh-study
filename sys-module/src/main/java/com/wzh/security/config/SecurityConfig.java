@@ -3,7 +3,6 @@ package com.wzh.security.config;
 import com.wzh.security.filter.JwtAuthenticationTokenFilter;
 import com.wzh.security.handle.AuthenticationEntryPointHandle;
 import com.wzh.security.handle.LogoutSuccessToHandler;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,7 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * spring security配置
  *
- * @author ruoyi
+ * @author wzh
  */
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Configuration

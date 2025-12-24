@@ -28,4 +28,20 @@ public class CorsConfig {
 
         return new CorsFilter(source);
     }
+
+
+    //TODO 可替换为如下配置
+//    @Configuration
+//    public class WebMvcConfig implements WebMvcConfigurer {
+//
+//        @Override
+//        public void addCorsMappings(CorsRegistry registry) {
+//            registry.addMapping("/**")
+//                    .allowedOriginPatterns("*")
+//                    .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+//                    .allowedHeaders("*")
+//                    .allowCredentials(true)
+//                    .maxAge(3600);
+//        }
+//    }
 }

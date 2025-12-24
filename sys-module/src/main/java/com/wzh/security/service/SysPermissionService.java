@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +25,6 @@ public class SysPermissionService {
     private final ISysRoleService roleService;
 
     private final ISysMenuService menuService;
-
 
 
     /**

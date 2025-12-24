@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 /**
  * spring redis 工具类
  *
- * @author ruoyi
+ * @author wzh
  **/
 @Component
 public class RedisCache {

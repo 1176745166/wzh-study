@@ -19,6 +19,8 @@ spring:
       write-dates-as-timestamps: false
     deserialization:
       ADJUST_DATES_TO_CONTEXT_TIME_ZONE: false
+  profiles:
+    active: local
 
 server:
   port: 8099

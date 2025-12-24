@@ -3,7 +3,7 @@ package com.wzh.exception.service;
 /**
  * 业务异常
  *
- * @author ruoyi
+ * @author wzh
  */
 public final class ServiceException extends RuntimeException
 {
