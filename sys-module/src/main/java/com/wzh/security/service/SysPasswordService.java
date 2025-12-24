@@ -2,11 +2,12 @@ package com.wzh.security.service;
 
 import java.util.concurrent.TimeUnit;
 
-import com.exception.user.UserPasswordNotMatchException;
-import com.exception.user.UserPasswordRetryLimitExceedException;
-import com.redis.RedisCache;
+
 import com.wzh.constant.CacheConstants;
 import com.wzh.domain.SysUser;
+import com.wzh.exception.user.UserPasswordNotMatchException;
+import com.wzh.exception.user.UserPasswordRetryLimitExceedException;
+import com.wzh.redis.RedisCache;
 import com.wzh.security.context.AuthenticationContextHolder;
 import com.wzh.security.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,9 @@ public class SysPasswordService
     @Autowired
     private RedisCache redisCache;
 
-    @Value(value = "${user.password.maxRetryCount}")
-    private int maxRetryCount;
+    private int maxRetryCount = 5;
 
-    @Value(value = "${user.password.lockTime}")
-    private int lockTime;
+    private int lockTime = 10;
 
     /**
      * 登录账户密码错误次数缓存键名

@@ -25,12 +25,14 @@ public class AuthenticationEntryPointHandle implements AuthenticationEntryPoint 
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    // ... existing code ...
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         response.setStatus(HttpStatus.OK.value());
         response.setContentType("application/json;charset=utf-8");
 
-        String code = String.valueOf(HttpStatus.UNAUTHORIZED);
+        String code = String.valueOf(HttpStatus.UNAUTHORIZED.value());
         String msg = String.format("请求访问：%s，认证失败，无法访问系统资源", request.getRequestURI());
 
         ResponseVO responseVO = ResponseVO.error(Integer.valueOf(code), msg);

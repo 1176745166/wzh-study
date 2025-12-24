@@ -2,15 +2,14 @@ package com.wzh.security.service;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.ObjectUtil;
-import com.redis.RedisCache;
 import com.wzh.constant.CacheConstants;
 import com.wzh.constant.Constants;
+import com.wzh.redis.RedisCache;
 import com.wzh.security.dto.login.LoginUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +27,15 @@ import java.util.concurrent.TimeUnit;
  * @version: 1.0
  */
 @Component
-@AllArgsConstructor
 public class TokenService {
 
     private static final Logger log = LoggerFactory.getLogger(TokenService.class);
+
+    protected static final long MILLIS_SECOND = 1000;
+
+    protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
+
+    private static final Long MILLIS_MINUTE_TWENTY = 20 * 60 * 1000L;
 
     // 令牌自定义标识
     @Value("${token.header}")
@@ -45,13 +49,11 @@ public class TokenService {
     @Value("${token.expireTime}")
     private int expireTime;
 
-    protected static final long MILLIS_SECOND = 1000;
-
-    protected static final long MILLIS_MINUTE = 60 * MILLIS_SECOND;
-
-    private static final Long MILLIS_MINUTE_TWENTY = 20 * 60 * 1000L;
-
     private final RedisCache redisCache;
+
+    public TokenService(RedisCache redisCache) {
+        this.redisCache = redisCache;
+    }
 
     /**
      * 获取用户身份信息
@@ -135,7 +137,6 @@ public class TokenService {
     }
 
 
-
     /**
      * 从数据声明生成令牌
      *
@@ -144,9 +145,12 @@ public class TokenService {
      */
     private String createToken(Map<String, Object> claims)
     {
+        // 创建密钥
+        var secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         String token = Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(secretKey)
+                .compact();
         return token;
     }
 
@@ -174,10 +178,12 @@ public class TokenService {
      */
     private Claims parseToken(String token)
     {
+        var secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     private String getTokenKey(String uuid) {

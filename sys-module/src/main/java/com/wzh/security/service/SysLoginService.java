@@ -1,14 +1,12 @@
 package com.wzh.security.service;
 
-import com.exception.user.UserNotExistsException;
-import com.exception.user.UserPasswordNotMatchException;
-import com.redis.RedisCache;
+import com.wzh.exception.user.UserNotExistsException;
+import com.wzh.exception.user.UserPasswordNotMatchException;
 import com.wzh.security.dto.login.LoginUser;
 import com.wzh.constant.UserConstants;
 import com.wzh.security.context.AuthenticationContextHolder;
-import com.wzh.service.ISysUserService;
-import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,17 +19,14 @@ import org.springframework.stereotype.Component;
  * @version: 1.0
  */
 @Component
-@AllArgsConstructor
 public class SysLoginService {
 
-    private final TokenService tokenService;
+    @Autowired
+    private  TokenService tokenService;
 
     //认证管理器
-    private final  AuthenticationManager authenticationManager;
-
-    private final RedisCache redisCache;
-
-    private final ISysUserService userService;
+    @Autowired
+    private   AuthenticationManager authenticationManager;
 
 
     /**

@@ -4,12 +4,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.exception.service.ServiceException;
+import com.wzh.exception.service.ServiceException;
 import com.wzh.domain.SysRole;
 import com.wzh.domain.SysUser;
 import com.wzh.security.dto.login.LoginUser;
-import com.wzh.service.ISysRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,11 +21,7 @@ import org.springframework.util.StringUtils;
  *
  * @author ruoyi
  */
-public class SecurityUtils
-{
-
-   @Autowired
-   private ISysRoleService iSysRoleService;
+public class SecurityUtils {
 
     /**
      * 用户ID

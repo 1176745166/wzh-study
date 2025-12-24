@@ -1,6 +1,7 @@
 package com.wzh.controller;
 
 import com.wzh.domain.SysUser;
+import com.wzh.mapper.UserMapper;
 import com.wzh.security.dto.login.LoginDTO;
 import com.wzh.security.dto.login.LoginUser;
 import com.wzh.security.service.SysPermissionService;
@@ -35,12 +36,11 @@ public class SysLoginController {
 
     private final SysLoginService loginService;
 
-    private final ISysMenuService menuService;
-
     private final SysPermissionService permissionService;
 
     private final TokenService tokenService;
 
+    private final UserMapper userMapper;
 
     @PostMapping("/login")
     @Operation(summary = "登录接口", description = "登录接口")

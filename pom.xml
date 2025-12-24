@@ -25,7 +25,7 @@
     <lombok.version>1.18.24</lombok.version>
     <hutool.version>5.8.23</hutool.version>
     <springdoc.version>2.2.0</springdoc.version>
-    <jwt.version>0.9.1</jwt.version>
+    <jwt.version>0.12.6</jwt.version>
   </properties>
 
   <!--作为依赖版本管理-->

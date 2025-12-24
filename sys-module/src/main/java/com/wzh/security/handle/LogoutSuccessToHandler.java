@@ -25,13 +25,16 @@ import java.io.IOException;
  * @version: 1.0
  */
 @Component
-@AllArgsConstructor
 public class LogoutSuccessToHandler implements LogoutSuccessHandler {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
     private final TokenService tokenService;
+
+    public LogoutSuccessToHandler(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {

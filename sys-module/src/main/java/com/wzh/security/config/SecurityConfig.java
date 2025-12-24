@@ -29,27 +29,30 @@ import org.springframework.web.filter.CorsFilter;
  */
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Configuration
-@AllArgsConstructor
 public class SecurityConfig {
     /**
      * 自定义用户认证逻辑
      */
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    private  UserDetailsService userDetailsService;
 
     /**
      * 认证失败处理类
      */
-    private final AuthenticationEntryPointHandle unauthorizedHandler;
+    @Autowired
+    private  AuthenticationEntryPointHandle unauthorizedHandler;
 
     /**
      * 退出处理类
      */
-    private final LogoutSuccessToHandler logoutSuccessHandler;
+    @Autowired
+    private  LogoutSuccessToHandler logoutSuccessHandler;
 
     /**
      * token认证过滤器
      */
-    private final JwtAuthenticationTokenFilter authenticationTokenFilter;
+    @Autowired
+    private  JwtAuthenticationTokenFilter authenticationTokenFilter;
 
     /**
      * 跨域过滤器
@@ -57,6 +60,12 @@ public class SecurityConfig {
     @Autowired
     private CorsFilter corsFilter;
 
+
+
+    @Autowired
+    public void setCorsFilter(CorsFilter corsFilter) {
+        this.corsFilter = corsFilter;
+    }
 
     /**
      * 身份验证实现
@@ -101,7 +110,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) -> {
                     // 对于登录login 注册register 验证码captchaImage 允许匿名访问
-                    requests.requestMatchers("/login", "/register", "/captchaImage").permitAll()
+                    requests.requestMatchers("/api/login", "/register", "/captchaImage").permitAll()
                             // 静态资源，可匿名访问
                             .requestMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
                             .requestMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll()

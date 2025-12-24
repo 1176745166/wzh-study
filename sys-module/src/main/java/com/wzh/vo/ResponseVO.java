@@ -6,6 +6,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Auther: wzh
@@ -37,23 +38,10 @@ public class ResponseVO<T> implements Serializable {
      */
     private T data;
 
-    /**
-     * 时间戳
-     */
-    private LocalDateTime timestamp;
-
-    /**
-     * 默认构造函数
-     */
-    public ResponseVO() {
-        this.timestamp = LocalDateTime.now();
-    }
-
     public ResponseVO(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
-        this.timestamp = LocalDateTime.now();
     }
 
     /**
