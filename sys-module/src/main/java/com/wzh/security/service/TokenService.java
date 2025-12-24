@@ -164,7 +164,7 @@ public class TokenService {
         //获取请求头Authorization的token
         String token = request.getHeader(header);
         if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)){
-            //溢出token的前缀"Bearer"
+            //移除token的前缀"Bearer"
             token = token.replace(Constants.TOKEN_PREFIX, "");
         }
         return token;
